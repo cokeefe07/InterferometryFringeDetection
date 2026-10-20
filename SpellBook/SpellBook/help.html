@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!--
+SpellBook Manual
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpellBook Manual</title>
+<style>
+html, body {
+  background-color: #2c3e50;
+  background: linear-gradient(140deg, #2c3e50, #4ca1af);
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #333;
+}
+#main {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+h1 {
+  font-size: 2.5em;
+  color: #2c3e50;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+h2 {
+  color: #2980b9;
+  margin-top: 30px;
+}
+h3 {
+  color: #16a085;
+  margin-top: 20px;
+}
+p {
+  line-height: 1.6;
+}
+ul {
+  line-height: 1.6;
+}
+code {
+  background-color: #f8f9fa;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: Consolas, monospace;
+  color: #e74c3c;
+}
+.screenshot-placeholder {
+  width: 100%;
+  height: 300px;
+  background-color: #eee;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+img {
+  max-width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+</style>
+</head>
+<body>
+<div id="main">
+<h1>SpellBook Manual</h1>
+<div id="contents">
+  <h2>Table of Contents</h2>
+  <ul>
+    <li><a href="#h2_introduction">Introduction</a></li>
+    <li><a href="#h2_detection">Detection Tab</a></li>
+    <li><a href="#h2_editor">Editor Tab</a></li>
+  </ul>
+</div>
+
+<h2 id="h2_introduction">Introduction</h2>
+<p>
+Welcome to <strong>SpellBook</strong>, a comprehensive tool for fringe detection and analysis. This software is designed to assist in processing interferograms, allowing users to detect fringes and manually refine masks for accurate plasma density calculations.
+</p>
+<p>
+The application is divided into two main workflows: <strong>Detection</strong> and <strong>Editor</strong>.
+</p>
+
+<h2 id="h2_detection">Detection Tab</h2>
+<p>
+The Detection tab is the starting point for processing raw interferograms. It uses image processing algorithms to illuminate the image, enhance contrast, and automatically trace fringes.
+</p>
+
+<div class="screenshot-placeholder">
+    <!-- <img src="images/detection_tab.png" alt="Detection Tab Screenshot"> -->
+    [Insert Detection Tab Screenshot Here]
+</div>
+
+<h3>Key Features</h3>
+<ul>
+    <li><strong>Illumination & Enhancement:</strong> Automatically adjusts image lighting to highlight fringe patterns.</li>
+    <li><strong>Auto-Tracing:</strong> Detects fringe lines based on configurable parameters.</li>
+    <li><strong>Live Preview:</strong> See changes in real-time as you adjust sliders.</li>
+</ul>
+
+<h3>Controls</h3>
+<ul>
+    <li><strong>Navigation:</strong> Right-click drag to pan, Mouse wheel to zoom.</li>
+    <li><strong>Blur σ:</strong> Controls the Gaussian blur sigma. Higher values smooth out noise but may blur fine details.</li>
+    <li><strong>Line Length & Thickness:</strong> Defines the expected dimensions of fringes to be detected.</li>
+    <li><strong>Max Angle & Step:</strong> Configures the orientation sensitivity of the detection algorithm.</li>
+    <li><strong>Morphology Operations:</strong>
+        <ul>
+            <li><strong>Dilate:</strong> Thickens detected lines.</li>
+            <li><strong>Min Area:</strong> Removes small noise artifacts.</li>
+            <li><strong>Prune Spurs:</strong> Removes small branches from the skeletonized fringes.</li>
+            <li><strong>Fill Loops:</strong> Closes small holes within fringes.</li>
+            <!-- Min Fragment feature removed -->
+        </ul>
+    </li>
+    <li><strong>Hump Width:</strong> Flattens fringes by removing "humps" or irregularities. Set to 0 to disable.</li>
+    <li><strong>Background Opacity:</strong> Adjusts the visibility of the original image behind the detected fringes.</li>
+</ul>
+
+
+
+<h2 id="h2_editor">Editor Tab</h2>
+<p>
+The Editor tab provides a powerful environment for manual refinement. Here you can clean up the automatically detected fringes, add missing sections, and create gray masks for specific regions.
+</p>
+
+<div class="screenshot-placeholder">
+    <!-- <img src="images/editor_tab.png" alt="Editor Tab Screenshot"> -->
+    [Insert Editor Tab Screenshot Here]
+</div>
+
+<h3>Tools & Modes</h3>
+<ul>
+    <li><strong>Image Loading:</strong> Use <strong>Load Shot Image</strong> and <strong>Load Ref Image</strong> to place original context images behind your masks. Use <strong>Open Shot Binary</strong> / <strong>Open Reference Binary</strong> to load masks.</li>
+    <li><strong>Alignment & Cropping:</strong>
+        <ul>
+            <li><strong>Nudge:</strong> Use arrow keys to nudge the reference image and its mask by 1 pixel.</li>
+            <li><strong>Reset Nudge:</strong> Realigns images to their initial positions.</li>
+            <li><strong>Crop View:</strong> Draw a rectangle to crop the view (max 2048x2048). Use <strong>Reset Crop</strong> to undo.</li>
+        </ul>
+    </li>
+    <li><strong>Brush Modes & Drawing:</strong>
+        <ul>
+            <li><strong>Add/Remove Black:</strong> Freehand draw or erase binary fringe lines.</li>
+            <li><strong>Draw Line (1px):</strong> Click and drag to draw straight lines.</li>
+            <li><strong>Draw Spline (1px):</strong> Left-click to add points to a curve, Ctrl+Left-click to finish and draw the spline.</li>
+            <li><strong>Add/Remove Mask (Gray):</strong> Paint a gray mask to exclude regions from analysis.</li>
+        </ul>
+    </li>
+    <li><strong>Brush Control:</strong> Hold <code>Ctrl</code> and scroll the mouse wheel to adjust the brush size dynamically.</li>
+    <li><strong>Ruler:</strong> Measure pixel distances. Use the <strong>Lock</strong> dropdown to constrain measurement to Horizontal or Vertical.</li>
+    <li><strong>Link Endpoints:</strong> Automatically connects nearby open endpoints of fringes based on distance and angle tolerances.</li>
+    <li><strong>Magic2 Line:</strong> Draws an invisible vertical line; fringes touching this line are highlighted.</li>
+    <li><strong>Color Comps:</strong> Toggles random coloring of connected components to easily identify separate fringe segments.</li>
+    <li><strong>Merge Binaries:</strong> Load another binary image to overlay on top of your current work, then combine them.</li>
+</ul>
+
+<h3>Shortcuts</h3>
+<ul>
+    <li><strong>Undo:</strong> <code>Ctrl + Z</code> or use the Undo button.</li>
+    <li><strong>Zoom/Pan:</strong> Mouse wheel to zoom, Right-click drag to pan.</li>
+    <li><strong>Nudge:</strong> Arrow keys.</li>
+</ul>
+
+</div>
+</body>
+</html>
